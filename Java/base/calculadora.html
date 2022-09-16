@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <table>
+        <th colspan="4">calculadora</th>
+        <tr>
+            <td colspan="2"> <input type="text" id="vA" size="4"></td>
+            <td colspan="2"> <input type="text" id="vB" size="4"></td>
+        </tr>
+        <tr>
+            <td><input type="button" value="+" id="bmais" style="width: 20px; height: 20px;" onclick="reseltado.value=calcula('vA','vB','+')"></td>
+            <td><input type="button" value="-" id="bmenos" style="width: 20px; height: 20px;" onclick="reseltado.value=calcula('vA','vB','-')"></td>
+            <td><input type="button" value="*" id="bmult" style="width: 20px; height: 20px;" onclick="reseltado.value=calcula('vA','vB','*')"></td>
+            <td><input type="button" value="/" id="bdiv" style="width: 20px; height: 20px;" onclick="reseltado.value=calcula('vA','vB','/')"></td>
+        </tr>
+        <tr>
+            <td colspan="4"><input type="text" value="0000" id="resultado" size="10"></td>
+        </tr>
+    </table>
+</body>
+</html>

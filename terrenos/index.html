@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="estilo.css">
+    <title>Terrenos - Exemplo uso Classes e Objetos</title>
+</head>
+<body>
+    <h1>Terrenos - Exemplo uso Classes e Objetos</h1>
+    <form id="fTerreno" action="#" method="get">
+        <label for="iProprietario" id="lProprietario">Proprietario</label>
+        <input type="text" id="iProprietario" placeholder="Nome Proprietário" required>
+        <br>
+        <label for="tEndereco" id="lEndereço">Endereço</label>
+        <textarea id="tEndereco" placeholder="Endereço" required></textarea>
+        <br>
+        <label for="iLargura" id="lLargura">Largura</label>
+        <input type="text" id="iLargura" placeholder="em m2" pattern="[0-9]+$" required>
+        <br>
+        <label for="iComprimento" id="lComprimento">Comprimento</label>
+        <input type="text" id="iComprimento" pattern="[0-9]+$" placeholder="em m2" required>
+        <br>
+        <label for="iArea" id="lArea">Area</label>
+        <input type="text" id="iArea" readonly>
+        <br><br>
+
+        <input type="submit" id="bIncluir" value="Incluir">&nbsp;  
+        <input type="button" id="bListar" value="Listar">&nbsp;
+        <input type="reset" id="bLimpar" value="Limpar">  
+    </form>
+    <p id="pObs">Duplo clique no Nro para Apagar</p>
+    <p id="pMostra"></p>
+</body>
+    <script src="terrenos.js" language="JavaScript"></script>
+    <script language="JavaScript">
+        document.getElementById("fTerreno").onsubmit = function() {
+            //console.log(document.getElementById("iProprietario").value);
+            let varea = fIncluirTerreno(document.getElementById("iProprietario").value,
+                    document.getElementById("tEndereco").value,
+                    document.getElementById("iLargura").value,
+                    document.getElementById("iComprimento").value);                            
+                    document.getElementById("iArea").value = varea;
+                    document.getElementById("pMostra").innerHTML = "Nro Terenos: "+fContaTerrenos();
+        };
+
+        document.getElementById("bListar").onclick = function() {
+            document.getElementById("pMostra").innerHTML = fListarTerrenos(" | ","<br>")
+            +"Nro Terenos: "+fContaTerrenos();
+        }
+
+        document.getElementById("fTerreno").onreset = function() {
+            fLimparTerrenos();
+        }
+    </script>
+</html>

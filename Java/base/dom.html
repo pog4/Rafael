@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script language="JavaScript">
+        function altera_campo() {
+            var campo = document.getElementById("nome");
+            document.getElementById("mostra").innerHTML = campo.value;
+        }
+    </script>
+</head>
+<body>
+    <h2>Exemplo acesso elementos por DOM</h2>
+    Informe seu nome: <input type="text" value="" id="nome"> <br>
+    <input type="button" value="ok" onclick="altera_campo()">
+    <p id="mostra" style="color: blue;font-weight: bold;"></p>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>aaaaaaaaaaaaaaaa</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function()
+            {
+            $("#maiusculo").click(function()
+            {
+                let texto = $("#texto").val();
+                $("#mostra").html(texto.toUpperCase());
+            });
+        });
+    </script>
+</head>
+<body>
+    <h1>Objetivo</h1>
+    <p>Criar uma página HTML com com input text e um botão "Maiúscula"
+        <br />
+        ao clicar asdawdwadafawf
+        <br />
+
+    </p>
+    <br>
+    <input type="text" id="texto"> <br>
+    <input type="button" id="maiusculo" value="Maiúscula">
+    <br>
+    <div id="mostra"></div>
+    
+</body>
+</html>

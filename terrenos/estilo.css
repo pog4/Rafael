@@ -1,0 +1,10 @@
+
+label {
+    width: 100px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+p#pObs {
+    font-size: xx-small;
+}

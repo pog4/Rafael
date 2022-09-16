@@ -1,0 +1,39 @@
+h1 {
+    margin: 20px auto;
+    text-align: center;
+}
+
+label {
+    text-align: right;
+    display: inline-block;
+    width: 130px;
+    margin-bottom: 5px;
+}
+
+input {
+    margin-bottom: 5px;
+}
+
+form {
+    width: 400px;
+    padding: 10px;
+    display: block;
+    text-align: center;
+    margin: 5px auto;
+    border: 1px solid gray;
+    background-color: lightgray;
+}
+
+div#dMsg {
+    height: 20px;
+    width: 400px;
+    padding: 5px 10px;
+    display: block;
+    text-align: center;
+    margin: 5px auto;
+    border: 1px solid gray;
+    background-color: whitesmoke;
+    color: red;
+
+
+}

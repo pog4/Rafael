@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script language="JavaScript">
+        var mes = ["janeiro","fevereiro","março","abril","maio","junho","julho","agosto","setembro","outubro","novembro","dezembro"];
+
+        var num = 2
+        while (num != 0){
+            var num = window.prompt("0 para, 1 a 12 meses")
+            if(isNaN(num) || num < 0 || num > 12){
+            alert("erro")}
+            else{ 
+            alert(mes[num-1])}
+            }
+    </script>
+</head>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script language="JavaScript">
+        
+        var n = window.prompt("Diga um número")
+
+        if (isNaN(n)){
+            document.write("erro")
+        }
+        else if(n>=0){
+            document.write(n+" é Positivo <br>")
+            if(n<10){
+                (n+" é uma unidade")
+            }
+            else if(n<100){
+                document.write(n+" é um dezena")
+            }
+            else if(n<1000){
+                document.write(n+" é um centena")
+            }
+            else if(n>=1000){
+                document.write(n+" é um milhar <br>")
+                if(n>=10000){
+                    document.write("a diferença acima de 10000 é: ",n-10000)
+                }
+                else{
+                    document.write("a diferença abaixo de 10000 é: ",10000-n)
+                }
+            }
+        }
+        else{
+            document.write(n+" é negativo")
+        }
+    </script>
+</head>
+<body>
+
+</body>
+</html>

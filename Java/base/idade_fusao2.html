@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script language="JavaScript">
+
+    function fidade(anos) {
+        if (anos<18) {
+            return("menor");
+        }
+        else{
+            return("maior");
+        }
+    }
+
+    function fsexo(sexo) {
+        return((sexo =="M" || sexo == "m"?"Homem":"Mulher")); 
+    }
+
+
+    function mostra(nome, anos, sexo) {
+        window.alert((nome+" você é "+fidade(anos)+" de idade, e é "+fsexo(sexo)));
+    }
+
+    </script>
+</head>
+<body>
+    <h1>Receba</h1>
+    <p style="font-family:'Courier New', Courier, monospace">
+    Nome..: <input id="iNome" type="text" value=""> <br>
+    Idade.: <input id="iIdade" type="text" value=""> <br>
+    Sexo..: <input id="iSexo" type="text" value=""> <br>
+    <input type="button" value="Mostrar" onclick="mostra(iNome.value,iIdade.value,iSexo.value)"></p>
+</body>
+</html>

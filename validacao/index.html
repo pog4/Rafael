@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="estilo.css">
+    <script language="JavaScript" src="funcoes.js"></script>
+    <title>Exemplo Validação Formulário</title>
+</head>
+<body>
+    <h1>Cadastro recebimento e-mail</h1>
+    <!-- Ou chamar no evento onsubmit uma função de validação, essa retornando True avança, senão cancela. 
+    Obs. Incluir return -->
+    <form id="news" name="news" action="cadastro.html" onsubmit="return fValida()">
+        <label for="iNome">Nome:</label>
+        <input type="text" id="iNome" name="iNome">
+        <br/>
+        <label for="iEmail">e-mail:</label>
+        <input type="text" id="iEmail" name="iEmail">
+        <br/>
+        <label for="iFone">Fone:</label>
+        <input type="text" id="iFone" name="iFone">
+        <br/>
+        <input type="submit" name="bSubmit" id="bSubmit" value="Enviar">
+        <input type="reset" name="bReset" id="bReset" value="Limpar">
+        <br>
+    </form>
+    <div id="dMsg" name="dMsg"></div>
+</body>
+</html>

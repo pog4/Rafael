@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="estilo.css">
+    <title>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</title>
+</head>
+<body>
+    <h1>Alunos?</h1>
+    <form id="faluno" action="#" method="get">
+    
+        Nome<input type="text" id="nome" placeholder="Nome" required>
+        <br>
+        Nota 1<input type="text" id="n1" placeholder="0 - 10" required>
+        <br>
+        Nota 2<input type="text" id="n2" placeholder="0 - 10" required>
+        <br>
+        Nota 3<input type="text" id="n3" placeholder="0 - 10" required>
+        <br>
+        Média<input type="text" id="media" readonly>
+        <br><br>
+
+        <input type="submit" id="bIncluir" value="Incluir">&nbsp;  
+        <input type="button" id="bListar" value="Listar">&nbsp;
+        <input type="reset" id="bLimpar" value="Limpar">  
+    </form>
+    <p id="pObs">Duplo clique no Nro para Apagar</p>
+    <p id="pMostra"></p>
+</body>
+    <script src="javas.js" language="JavaScript"></script>
+    <script language="JavaScript">
+        document.getElementById("faluno").onsubmit = function() {
+            let vmedia = IncluirAluno(document.getElementById("nome").value,
+                    document.getElementById("n1").value,
+                    document.getElementById("n2").value,
+                    document.getElementById("n3").value);                            
+                document.getElementById("media").value = vmedia;
+                document.getElementById("pMostra").innerHTML = "Nro Alunos: "+ContaAluno();
+        };
+
+        document.getElementById("bListar").onclick = function() {
+            document.getElementById("pMostra").innerHTML = ListarAluno(" | ","<br>")
+            +"Nro Alunos: "+ContaAluno();
+        }
+
+        document.getElementById("faluno").onreset = function() {
+            LimparAluno();
+        }
+    </script>
+</html>
