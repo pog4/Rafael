@@ -44,7 +44,7 @@
             <?php
                 while ($linha = $consulta->fetch()) {
                   ?>
-                  <?php echo "<a href=\"?pagina=categoria&id={$linha['id']}\">"?><?php echo $linha['descricao']; ?> </a> 
+                  <?php echo "<a href=\"index.php?pagina=categoria&id={$linha['id']}\">"?><?php echo $linha['descricao']; ?> </a> 
             <?php
                 }
             ?>       
