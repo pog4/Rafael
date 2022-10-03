@@ -15,6 +15,20 @@
         <li class="nav-item">
           <a class="nav-link" href="#">Contato</a>
         </li>
+        <li>
+        <a class="btn btn-success" href="?pagina=sacola">
+    Sacola
+
+    <?php if (isset($_SESSION['sacola'])) {
+        echo '(' . count($_SESSION['sacola']) . ')';
+    } ?> </a>
+        </li>
+        <li>
+            <?php if (isset($_SESSION['autenticado'])) { ?>
+            <a class="btn btn-info" href="?pagina=meus_pedidos">Meus pedidos</a>
+            <?php }
+            ?>
+        </li>
         <li class="nav-item">
           <a class="nav-link disabled">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</a>
         </li>
@@ -27,6 +41,7 @@
   </div>
 </nav>
 
+                                                    <!--Categoria-->
 <?php
   include_once('lib/conexao.php');
 
@@ -44,10 +59,15 @@ $sql = "SELECT * from categorias";
 
         <?php
             while ($linha = $consulta->fetch()) {
-              ?>
-              <?php echo "<a href=\"?pagina=categoria&id={$linha['id']}\">"?><?php echo $linha['descricao']; ?> </a> 
+              
+              if($linha['categoria_pai'] != ''){
+              echo "<a href=\"?pagina=categoria&id={$linha['id']}\">"?><?php echo $linha['descricao']; ?> </a> 
         <?php
+            }else{
+              echo "<a id='cat' href=\"?pagina=categoria&categoria_pai={$linha['id']}&id={$linha['id']}\">"?>•⠀<?php echo $linha['descricao']; ?> </a>
+              <?php
             }
+          }
         ?>       
 
   </div>
@@ -61,15 +81,60 @@ $sql = "SELECT * from categorias";
   <?php
 
     if (!isset($_GET['id'])) {
-    
+      if (!isset($_GET['pagina'])) {
       $sql = "SELECT * from produtos";
 
       $consulta = $conn->prepare($sql);
       $resultado = $consulta->execute();
-  ?>
 
-<br>
-    <table class="meio daw">
+      }elseif (isset($_GET['pagina'])) {
+        include "sacola.php";
+      }
+  ?>
+  
+<br>                                            <!--categoria pai -->
+<?php if ($_GET['categoria_pai']) {
+  $pai = $_GET["categoria_pai"];
+ ?>
+            <table class="meio daw">
+            <?php
+                    while ($linha = $consulta->fetch()) {
+                      
+                      if ($linha['categoria_pai'] = $pai or $linha['categoria_pai'] = "") {
+                ?> <tr>
+                <td>
+              <div class="card" style="width: 18rem;">
+              <img src="<?php echo $linha['imagem']; ?>" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title"><?php echo $linha['descricaop']; ?></h5>
+                <p class="card-text"><?php echo $linha['resumo']; ?></p>
+                <?php echo "<a href=\"produto.php?pagina=produto&id={$linha['id']}\" class='btn btn-primary'>VER</a>"  ?>  
+              </div>
+              </div></td> <td>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀</td>
+              <?php 
+                  }if ($linha = $consulta->fetch()) { 
+                    if ($linha['categoria_pai'] = $pai or $linha['categoria_pai'] = "") {?>
+              <td><div class="card" style="width: 18rem;">
+              <img src="<?php echo $linha['imagem']; ?>" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title"><?php echo $linha['descricaop']; ?></h5>
+                <p class="card-text"><?php echo $linha['resumo']; ?></p>
+                <?php echo "<a href=\"produto.php?pagina=produto&id={$linha['id']}\" class='btn btn-primary'>VER</a>"  ?>
+              </div>
+              </div></td>
+              <br><br>      
+              <?php
+          }}else{
+            echo "<td></td>";
+          }
+        ?>
+      </tr>   
+
+      <?php
+          }}else {   
+        ?>
+
+        <table class="meio daw">
     <?php
             while ($linha = $consulta->fetch()) {
         ?> <tr>
@@ -98,8 +163,7 @@ $sql = "SELECT * from categorias";
             echo "<td></td>";
           }
         ?>
-      </tr>
-      <?php } ?>
+      <?php }} ?>
 
 </table>
 </div>
@@ -147,8 +211,6 @@ $sql = "SELECT * from categorias";
 
 </table>
 </div>
-
-
 
     <?php
     }

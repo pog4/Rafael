@@ -2,10 +2,11 @@
 <?php
 
 session_start();
+error_reporting(0);
 
 include_once('lib/conexao.php');
 include_once('lib/sql.php');
-//include_once('lib/autenticar.php');
+include_once('lib/autenticar.php');
 include_once "menu.php";
 
 
