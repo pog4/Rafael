@@ -2,14 +2,29 @@
 <?php
 
 session_start();
-error_reporting(0);
+//error_reporting(0);
+
+if (isset($_GET['pagina']) && $_GET['pagina'] == 'logout') {
+    session_destroy();
+    session_start();
+    header('Location ?');
+}
 
 include_once('lib/conexao.php');
 include_once('lib/sql.php');
 include_once('lib/autenticar.php');
-include_once "menu.php";
 
-
-if(isset($_GET['pagina']) & $_GET['pagina']=='home'){
-    include ("home.php");
+//limpar sacola
+if (isset($_POST['limpar_sacola'])) {
+    unset($_SESSION['sacola']);
 }
+//adicionar a sacola
+if (isset($_POST['adicionar_sacola'])) {
+    $_SESSION['sacola'][] = $_GET['id'];
+}
+//remover da sacola
+if (isset($_POST['remover_sacola'])) {
+    unset($_SESSION['sacola'][$_POST['produto']]);
+}
+
+include_once "menu.php";

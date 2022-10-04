@@ -1,6 +1,6 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
  <link rel="stylesheet" href="css.css">
- <div id="top"></div>
+ <?php include_once "header.php"; ?>
 <nav class="navbar navbar-expand-lg bg-light">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">Navbar</a>
@@ -16,14 +16,6 @@
           <a class="nav-link" href="#">Contato</a>
         </li>
         <li>
-        <a class="btn btn-success" href="?pagina=sacola">
-    Sacola
-
-    <?php if (isset($_SESSION['sacola'])) {
-        echo '(' . count($_SESSION['sacola']) . ')';
-    } ?> </a>
-        </li>
-        <li>
             <?php if (isset($_SESSION['autenticado'])) { ?>
             <a class="btn btn-info" href="?pagina=meus_pedidos">Meus pedidos</a>
             <?php }
@@ -34,187 +26,83 @@
         </li>
       </ul>
       <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
+          <a class="btn btn-success" href="?pagina=sacola">
+        Sacola
+
+        <?php if (isset($_SESSION['sacola'])) {
+            echo '(' . count($_SESSION['sacola']) . ')';
+        } ?> </a>
       </form>
     </div>
   </div>
 </nav>
 
                                                     <!--Categoria-->
+
+<div class="row">
+
 <?php
   include_once('lib/conexao.php');
 
-$sql = "SELECT * from categorias";
-
-    $consulta = $conn->prepare($sql);
-    $resultado = $consulta->execute();
-
-    ?>
-
-<div class="row">
-  <div class="meio esq">
-
-  <ul id="cat">Categorias</ul> <br>
-
-        <?php
-            while ($linha = $consulta->fetch()) {
-              
-              if($linha['categoria_pai'] != ''){
-              echo "<a href=\"?pagina=categoria&id={$linha['id']}\">"?><?php echo $linha['descricao']; ?> </a> 
-        <?php
-            }else{
-              echo "<a id='cat' href=\"?pagina=categoria&categoria_pai={$linha['id']}&id={$linha['id']}\">"?>•⠀<?php echo $linha['descricao']; ?> </a>
-              <?php
-            }
-          }
-        ?>       
-
+  $sql_categorias = 'SELECT * from categorias order by id';
+  $sql_prepara = $conn->prepare($sql_categorias);
+  $sql_prepara->execute();
+  ?>
+    <div class='meio esq'>
+      <ul id="cat">Categorias</ul>
+<?php
+  while ($categoria = $sql_prepara->fetch()) {
+      if (!empty($categoria['categoria_pai'])) {
+          $identacao = '';
+      } else {
+          $identacao = '•⠀&nbsp';
+      }
+      echo "<a href=\"?pagina=produtos&categoria={$categoria['id']}\" class=\"btn btn-link\">{$identacao}{$categoria['descricao']}</a>";
+  }
+  ?>
   </div>
 
 
 
-  <div class="meio esp"></div>
+  <div class="meio esp"></div> <!--separação da listagem-->
 
 
-
-  <?php
-
-    if (!isset($_GET['id'])) {
-      if (!isset($_GET['pagina'])) {
-      $sql = "SELECT * from produtos";
-
-      $consulta = $conn->prepare($sql);
-      $resultado = $consulta->execute();
-
-      }elseif (isset($_GET['pagina'])) {
-        include "sacola.php";
-      }
-  ?>
   
-<br>                                            <!--categoria pai -->
-<?php if ($_GET['categoria_pai']) {
-  $pai = $_GET["categoria_pai"];
- ?>
-            <table class="meio daw">
-            <?php
-                    while ($linha = $consulta->fetch()) {
-                      
-                      if ($linha['categoria_pai'] = $pai or $linha['categoria_pai'] = "") {
-                ?> <tr>
-                <td>
-              <div class="card" style="width: 18rem;">
-              <img src="<?php echo $linha['imagem']; ?>" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title"><?php echo $linha['descricaop']; ?></h5>
-                <p class="card-text"><?php echo $linha['resumo']; ?></p>
-                <?php echo "<a href=\"produto.php?pagina=produto&id={$linha['id']}\" class='btn btn-primary'>VER</a>"  ?>  
-              </div>
-              </div></td> <td>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀</td>
-              <?php 
-                  }if ($linha = $consulta->fetch()) { 
-                    if ($linha['categoria_pai'] = $pai or $linha['categoria_pai'] = "") {?>
-              <td><div class="card" style="width: 18rem;">
-              <img src="<?php echo $linha['imagem']; ?>" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title"><?php echo $linha['descricaop']; ?></h5>
-                <p class="card-text"><?php echo $linha['resumo']; ?></p>
-                <?php echo "<a href=\"produto.php?pagina=produto&id={$linha['id']}\" class='btn btn-primary'>VER</a>"  ?>
-              </div>
-              </div></td>
-              <br><br>      
-              <?php
-          }}else{
-            echo "<td></td>";
-          }
-        ?>
-      </tr>   
+  <?php                             //Listagem da listagem
 
-      <?php
-          }}else {   
-        ?>
+$sql_categoria = 'SELECT * from categorias where id = :id';
+$categoria = $conn->prepare($sql_categoria);
+$categoria->execute(['id' => $_GET['categoria']]);
+$linha_categoria = $categoria->fetch();
 
-        <table class="meio daw">
+if (empty($linha_categoria['categoria_pai'])) {
+    include 'produtos_destaque.php';
+} else {
+     ?>
+
+<div class="row meio prod">
     <?php
-            while ($linha = $consulta->fetch()) {
-        ?> <tr>
-        <td>
-      <div class="card" style="width: 18rem;">
-      <img src="<?php echo $linha['imagem']; ?>" class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title"><?php echo $linha['descricaop']; ?></h5>
-        <p class="card-text"><?php echo $linha['resumo']; ?></p>
-        <?php echo "<a href=\"produto.php?pagina=produto&id={$linha['id']}\" class='btn btn-primary'>VER</a>"  ?>  
-      </div>
-      </div></td> <td>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀</td>
-      <?php 
-          if ($linha = $consulta->fetch()) { ?>
-      <td><div class="card" style="width: 18rem;">
-      <img src="<?php echo $linha['imagem']; ?>" class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title"><?php echo $linha['descricaop']; ?></h5>
-        <p class="card-text"><?php echo $linha['resumo']; ?></p>
-        <?php echo "<a href=\"produto.php?pagina=produto&id={$linha['id']}\" class='btn btn-primary'>VER</a>"  ?>
-      </div>
-      </div></td>
-      <br><br>      
-      <?php
-          }else{
-            echo "<td></td>";
-          }
-        ?>
-      <?php }} ?>
+    $sql_produtos = 'SELECT * from produtos where categoria_id = :id';
+    $consulta_produtos = $conn->prepare($sql_produtos);
+    $consulta_produtos->execute(['id' => $_GET['categoria']]);
 
-</table>
+    while ($produto = $consulta_produtos->fetch()) { ?>
+    <div class="card" style="width: 18rem;">
+        <img src="<?php echo $produto['imagem']; ?>" class="card-img-top" alt="<?php echo $produto[
+    'descricaop'
+]; ?>">
+        <div class="card-body">
+            <h5 class="card-title"><?php echo $produto['descricaop']; ?></h5>
+            <p class="card-text"><?php echo $produto['resumo']; ?></p>
+            <a href="produto.php?pagina=produto&id=<?php echo $produto['id']; ?>" class="btn btn-primary">Detalhes</a>
+        </div>
+    </div>
+    <?php }
+    ?>
 </div>
 
-  <?php
-    }else {
-      
-      $sql = "SELECT * from produtos where categoria_id = :categoria_id";
-
-    $consulta = $conn->prepare($sql);
-    $resultado = $consulta->execute(['categoria_id' => $_GET['id']]);
-    ?>
-    <br>
-    <table class="meio daw">
-    <?php
-            while ($linha = $consulta->fetch()) {
-        ?> <tr>
-        <td>
-      <div class="card" style="width: 18rem;">
-      <img src="<?php echo $linha['imagem']; ?>" class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title"><?php echo $linha['descricaop']; ?></h5>
-        <p class="card-text"><?php echo $linha['resumo']; ?></p>
-        <?php echo "<a href=\"produto.php?pagina=produto&id={$linha['id']}\" class='btn btn-primary'>VER</a>"  ?>  
-      </div>
-      </div></td> <td>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀</td>
-      <?php 
-          if ($linha = $consulta->fetch()) { ?>
-      <td><div class="card" style="width: 18rem;">
-      <img src="<?php echo $linha['imagem']; ?>" class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title"><?php echo $linha['descricaop']; ?></h5>
-        <p class="card-text"><?php echo $linha['resumo']; ?></p>
-        <?php echo "<a href=\"produto.php?pagina=produto&id={$linha['id']}\" class='btn btn-primary'>VER</a>"  ?>
-      </div>
-      </div></td>
-      <br><br>      
-      <?php
-          }else{
-            echo "<td></td>";
-          }
-        ?>
-      </tr>
-      <?php } ?>
-
-</table>
+<?php
+} ?>
+    
 </div>
-
-    <?php
-    }
-    ?>
-
-
 <div class="rodape"></div>
