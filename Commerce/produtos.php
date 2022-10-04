@@ -25,7 +25,7 @@ if (empty($linha_categoria['categoria_pai'])) {
         <div class="card-body">
             <h5 class="card-title"><?php echo $produto['descricaop']; ?></h5>
             <p class="card-text"><?php echo $produto['resumo']; ?></p>
-            <a href="produto.php?pagina=produto&id=<?php echo $produto['id']; ?>" class="btn btn-primary">Detalhes</a>
+            <a href="?pagina=produto&id=<?php echo $produto['id']; ?>" class="btn btn-primary">Saiba mais</a>
         </div>
     </div></td>
     <?php 
@@ -37,7 +37,7 @@ if (empty($linha_categoria['categoria_pai'])) {
         <div class="card-body">
             <h5 class="card-title"><?php echo $produto['descricaop']; ?></h5>
             <p class="card-text"><?php echo $produto['resumo']; ?></p>
-            <a href="produto.php?pagina=produto&id=<?php echo $produto['id']; ?>" class="btn btn-primary">Detalhes</a>
+            <a href="?pagina=produto&id=<?php echo $produto['id']; ?>" class="btn btn-primary">Saiba mais</a>
         </div>
     </div></td>
          
