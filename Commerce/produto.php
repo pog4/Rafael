@@ -1,4 +1,6 @@
 <?php
+
+include_once "lib/conexao.php";
 $sql_produto = 'SELECT * from produtos where id = :id';
 $produto = $conn->prepare($sql_produto);
 $produto->execute(['id' => $_GET['id']]);
@@ -6,9 +8,9 @@ $produto_detalhes = $produto->fetch();
 ?>
 <h1><?php echo $produto_detalhes['descricaop']; ?></h1>
 
-<div class="meio daw">
+<div class="meio prod">
 <div class="card mb-3">
-    <img src="imagens/<?php echo $produto_detalhes['imagem']; ?>" class="card-img-top" alt="...">
+    <img src="<?php echo $produto_detalhes['imagem']; ?>" class="card-img-top" alt="...">
     <div class="card-body">
         <h5 class="card-title"><?php echo $produto_detalhes['descricaop']; ?></h5>
         <p class="card-text"><?php echo $produto_detalhes['resumo']; ?></p>

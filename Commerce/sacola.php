@@ -26,7 +26,7 @@ if (isset($_SESSION['sacola'])) { ?>
             ?>
         <tr>
             <th scope="row"><?php echo $produto['id']; ?></th>
-            <td><?php echo $produto['descricao']; ?></td>
+            <td><?php echo $produto['descricaop']; ?></td>
             <td><?php echo $produto['valor']; ?></td>
             <td>
                 <form method="POST">
