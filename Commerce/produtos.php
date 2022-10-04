@@ -9,7 +9,7 @@ if (empty($linha_categoria['categoria_pai'])) {
     include 'produtos_destaque.php';
 } else {
      ?>
-<table>
+<table class="meio daw">
 
     <?php
     $sql_produtos = 'SELECT * from produtos where categoria_id = :id';
@@ -17,7 +17,7 @@ if (empty($linha_categoria['categoria_pai'])) {
     $consulta_produtos->execute(['id' => $_GET['categoria']]);
 
     
-    while ($produto = $consulta_produtos->fetch()) { ?><td class="meio daw"> 
+    while ($produto = $consulta_produtos->fetch()) { ?><td> 
     <div class="card" style="width: 18rem;">
         <img src="<?php echo $produto['imagem']; ?>" class="card-img-top" alt="<?php echo $produto[
     'descricaop'
@@ -29,7 +29,7 @@ if (empty($linha_categoria['categoria_pai'])) {
         </div>
     </div></td>
     <?php 
-        if ($produto = $consulta_produtos->fetch()) {?><td class="meio daw">
+        if ($produto = $consulta_produtos->fetch()) {?><td>
             <div class="card" style="width: 18rem;">
         <img src="<?php echo $produto['imagem']; ?>" class="card-img-top" alt="<?php echo $produto[
     'descricaop'
@@ -46,7 +46,6 @@ if (empty($linha_categoria['categoria_pai'])) {
     ?>
     <?php }
     ?>
-</div>
 </table>
 <?php
 } ?>
