@@ -67,7 +67,7 @@
   <div class="meio esp"></div> <!--separação da listagem-->
 
 
-  <div class="meio prod">
+  
                     <?php if (isset($_GET['pagina'])) {
                         if ($_GET['pagina'] == 'produtos') {
                             include 'produtos.php';
@@ -91,6 +91,6 @@
                     } else {
                         include 'produtos_destaque.php';
                     } ?>
-</div>
+
 </div>
 <div class="rodape"></div>

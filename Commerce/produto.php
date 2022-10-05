@@ -6,9 +6,9 @@ $produto = $conn->prepare($sql_produto);
 $produto->execute(['id' => $_GET['id']]);
 $produto_detalhes = $produto->fetch();
 ?>
-<h1><?php echo $produto_detalhes['descricaop']; ?></h1>
 
-<div class="meio prod">
+<table class="meio daw">
+    <td>
 <div class="card mb-3">
     <img src="<?php echo $produto_detalhes['imagem']; ?>" class="card-img-top" alt="...">
     <div class="card-body">
@@ -24,5 +24,5 @@ $produto_detalhes = $produto->fetch();
         </p>
         <p class="card-text"><small class="text-muted"><?php echo $produto_detalhes['caracteristicas']; ?></small></p>
     </div>
-</div>
-</div>
+</div></td>
+</table>

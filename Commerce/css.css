@@ -13,6 +13,7 @@
 .meio {
   float: left;
   padding: 10px;
+  position: relative;
 }
 
 .meio.esq {

@@ -1,4 +1,4 @@
-<form method="post">
+<form class="meio daw" method="post">
     Login: <br>
     <input type="text" name="login" placeholder="e-mail">
     <br>
