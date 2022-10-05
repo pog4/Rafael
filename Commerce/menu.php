@@ -15,12 +15,6 @@
         <li class="nav-item">
           <a class="nav-link" href="#">Contato</a>
         </li>
-        <li>
-            <?php if (isset($_SESSION['autenticado'])) { ?>
-            <a class="btn btn-info" href="?pagina=meus_pedidos">Meus pedidos</a>
-            <?php }
-            ?>
-        </li>
         <li class="nav-item">
           <a class="nav-link disabled">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</a>
         </li>
@@ -32,6 +26,12 @@
         <?php if (isset($_SESSION['sacola'])) {
             echo '(' . count($_SESSION['sacola']) . ')';
         } ?> </a>
+        
+            <?php if (isset($_SESSION['autenticado'])) { ?>
+            <a class="btn btn-info" href="?pagina=meus_pedidos">Meus pedidos</a>
+            <?php }
+            ?>
+        
       </form>
     </div>
   </div>

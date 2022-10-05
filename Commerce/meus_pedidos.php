@@ -1,4 +1,4 @@
-<h3>Meus Pedidos: <?php echo $_SESSION['usuario']['login']; ?></h3>
+
 
 <?php
 $sql_pedidos = 'select * from vendas where usuario_id = :usuario_id';
@@ -7,7 +7,7 @@ $sql_pedidos->execute(['usuario_id' => $_SESSION['usuario']['id']]);
 
 while ($linha = $sql_pedidos->fetch()) {
 
-    echo "<h5>#{$linha['id']} - {$linha['data_venda']}</h5>";
+    
 
     $sql_itens = "
         select * 
@@ -18,8 +18,10 @@ while ($linha = $sql_pedidos->fetch()) {
     $sql_itens = $conn->prepare($sql_itens);
     $sql_itens->execute(['venda_id' => $linha['id']]);
     ?>
-<table class="table">
+<table class="table meio daw">
     <thead>
+        <?php echo " <tr>  <th colspan='4'><h5>#{$linha['id']} - {$linha['data_venda']}</h5></h3>   </th>   <tr>"; ?>
+        <tr>  <th colspan="4"> <h3>Meus Pedidos: <?php echo $_SESSION['usuario']['login']; ?></h3>   </th>   <tr>
         <tr>
             <th scope="col">#ID</th>
             <th scope="col">Produto ID</th>
@@ -35,16 +37,16 @@ while ($linha = $sql_pedidos->fetch()) {
         <tr>
             <th scope="row"><?php echo $item['id']; ?></th>
             <td><?php echo $item['produto_id']; ?></td>
-            <td><?php echo $item['descricao']; ?></td>
+            <td><?php echo $item['descricaop']; ?></td>
             <td><?php echo $item['valor']; ?></td>
         </tr>
         <?php
         }
         ?>
         <tr>
-            <td>
+            <th colspan="4">
                 Total: <?php echo $total; ?>
-            </td>
+            </th>
         </tr>
     </tbody>
 </table>

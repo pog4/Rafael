@@ -3,7 +3,7 @@ if (isset($_POST['autenticar']) & !empty($_POST['login']) & !empty($_POST['senha
     $sql = "SELECT *
             FROM usuarios
             WHERE login = :login
-            AND senha = md5(:senha)
+            AND senha = :senha
         ";
     $consulta = $conn->prepare($sql);
     $consulta->execute(['login' => $_POST['login'], 'senha' => $_POST['senha']]);

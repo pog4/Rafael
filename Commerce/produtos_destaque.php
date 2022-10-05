@@ -19,7 +19,7 @@
     $sql_produtos_destaque->execute();
 } ?>
 
-<table class="meio daw">
+<div class="meio daw">
 <?php while ($produto = $sql_produtos_destaque->fetch()) { ?>
     <td> 
     <div class="card" style="width: 18rem;">
@@ -45,4 +45,4 @@
         </div>
     </div></td>
         <?php }}?>
-</table>
+</div>

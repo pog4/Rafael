@@ -1,6 +1,8 @@
-<h1>
+<div class="meio daw">
+
+<td><h1>
     Finalizar pedido.
-</h1>
+</h1></td>
 
 <?php if (isset($_POST['gravar_pedido'])) {
     //gerar a venda
@@ -20,7 +22,7 @@
         $sql_insert_item = $conn->prepare($sql_insert_item);
         $sql_insert_item->execute(['venda_id' => $venda_id, 'produto_id' => $item[0]]);
     }
-    echo '<div class="alert alert-success" role="alert">
+    echo '<div class="meio daw" role="alert">
             Pedido realizado com sucesso!
         </div>';
     //zera o carrinho
@@ -34,4 +36,4 @@
 
 <?php
 }
-?>
+?></div>
